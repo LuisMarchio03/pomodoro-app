@@ -1,0 +1,90 @@
+.container {
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+	justify-content: center;
+	align-items: center;
+
+  text-align: center;
+
+  header {
+
+    h1 {
+      color: #ffffff;
+      font: 500 2rem sans-serif;
+
+      margin: 3rem 0;
+    }
+
+    nav {
+      width: 500px;
+      padding: 3% 4%;
+      background-color: rgba(64,73,121,1);
+      border: 4px solid rgb(55, 61, 95);
+      border-radius: 50px;
+
+      margin: 3rem 0;
+
+      ul {
+        display: flex;
+        justify-content: space-between;
+        list-style: none;
+
+        li {
+          width: 100%;
+          height: 100%;
+
+          a {
+            text-decoration: none;
+            
+            font: 400 1.2rem sans-serif;
+            color: white;
+          
+            transition: filter 0.2s;
+          
+            display: flex;
+            justify-content: center;
+
+            &#active {
+              text-decoration: underline;
+              color: #25d474;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  section.counter {
+    width: 400px;
+    height: 400px;
+
+    background-color: rgba(64,73,121,1);
+    border: 10px solid #25d474;
+    border-radius: 50%;
+
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .number-counter {
+      strong {
+        font: 500 6rem sans-serif;
+        color: #ffffff;
+      }
+
+      margin-top: 3.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    > span {
+      font-size: 6rem;
+      color: #ffffff;
+
+      cursor: pointer;
+    }
+  }
+}
