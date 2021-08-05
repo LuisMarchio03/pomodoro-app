@@ -4,6 +4,8 @@ import { FcDataConfiguration } from 'react-icons/fc';
 import { BsPlayFill } from 'react-icons/bs';
 
 import './style.scss';
+import { useState } from "react";
+import { useEffect } from "react";
 
 export function Home() {
   return (
