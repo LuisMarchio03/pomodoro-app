@@ -41,6 +41,11 @@ export function useTimer() {
     setActive(true);
   }
 
+  function pauseCountdown() {
+    setActive(false);
+    setTime(time);
+  }
+
   return {
     time,
     setTime,
@@ -58,6 +63,7 @@ export function useTimer() {
     minuteShortBreakRight,
     secondShortBreakLeft,
     secondShortBreakRight,
-    startCountdown
+    startCountdown,
+    pauseCountdown
   };
 }

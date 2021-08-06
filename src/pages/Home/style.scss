@@ -26,6 +26,10 @@
 
       margin: 3rem 0;
 
+      @media (max-width: 750px) {
+        width: 450px;
+      }
+
       ul {
         display: flex;
         justify-content: space-between;
@@ -55,6 +59,10 @@
               text-decoration: underline;
               color: var(--main-blue);
             }
+
+            &#long-break {
+              opacity: 0.4;
+            }
           }
         }
       }
@@ -70,6 +78,7 @@
     border-radius: 50%;
 
     margin: 0 auto;
+    margin-bottom: 2rem;
 
     display: flex;
     flex-direction: column;
@@ -119,6 +128,15 @@
 
     > span {
       font-size: 6rem;
+      color: #ffffff;
+
+      cursor: pointer;
+    }
+  }
+
+  footer {
+    span {
+      font-size: 3rem;
       color: #ffffff;
 
       cursor: pointer;

@@ -3,6 +3,7 @@ import { useTimer } from "../../hooks/useTimer";
 
 import { FcDataConfiguration } from "react-icons/fc";
 import { BsPlayFill } from "react-icons/bs";
+import { BsFillPauseFill } from "react-icons/bs";
 
 import "./style.scss";
 
@@ -11,7 +12,7 @@ export function Home() {
     time,
     setTime,
     timeShortBreak,
-    setTimeShortBreak,
+    setTimeShortBreak,  
     active,
     setActive,
     shortBreak,
@@ -25,6 +26,7 @@ export function Home() {
     secondShortBreakLeft,
     secondShortBreakRight,
     startCountdown,
+    pauseCountdown
   } = useTimer();
 
   useEffect(() => {
@@ -39,6 +41,20 @@ export function Home() {
     }
   }, [active, time]);
   
+  
+  useEffect(() => {
+    if (shortBreak && timeShortBreak > 0) {
+      setTimeout(() => {
+        setTimeShortBreak(timeShortBreak - 1);
+      }, 1000); // A cada 1 segundo, sera retirado -1 da varialvel time.
+    } else if (timeShortBreak === 0) {
+      setTime(25 * 60);
+      setTimeShortBreak(5 * 60);
+      setActive(false);
+      setShortBreak(false);
+    }
+  }, [shortBreak, timeShortBreak]);
+
   return (
     <main className="container">
       <div>
@@ -46,33 +62,33 @@ export function Home() {
           <h1>Pomodoro</h1>
           <nav>
             {shortBreak === false ? (
-              <ul>
-                <li>
-                  <a id="activeMenu" href="">
-                    Pomodoro
-                  </a>
-                </li>
-                <li>
-                  <a href="">Short break</a>
-                </li>
-                <li>
-                  <a href="">Long break</a>
-                </li>
-              </ul>
+                <ul>
+                  <li>
+                    <a id="activeMenu" href="">
+                      Pomodoro
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">Short break</a>
+                  </li>
+                  <li>
+                    <a id="long-break" href="">Long break</a>
+                  </li>
+                </ul>
             ) : (
-              <ul>
-                <li>
-                  <a href="">Pomodoro</a>
-                </li>
-                <li>
-                  <a id="activeMenuShortBreak" href="">
-                    Short break
-                  </a>
-                </li>
-                <li>
-                  <a href="">Long break</a>
-                </li>
-              </ul>
+                <ul>
+                  <li>
+                    <a href="">Pomodoro</a>
+                  </li>
+                  <li>
+                    <a id="activeMenuShortBreak" href="">
+                      Short break
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">Long break</a>
+                  </li>
+                </ul>
             )}
           </nav>
         </header>
@@ -88,9 +104,15 @@ export function Home() {
               <strong>{secondLeft}</strong>
               <strong>{secondRight}</strong>
             </div>
-            <span onClick={startCountdown}>
-              <BsPlayFill />
-            </span>
+            {active === false ? (
+                <span onClick={startCountdown}>
+                  <BsPlayFill />
+                </span>
+              ) : (
+                <span onClick={pauseCountdown}>
+                  <BsFillPauseFill />
+                </span>
+              )}
           </section>
         ) : (
           <section className="counterShortBreak">
@@ -103,9 +125,16 @@ export function Home() {
                 <strong>{secondShortBreakLeft}</strong>
                 <strong>{secondShortBreakRight}</strong>
             </div>
-            <span onClick={startCountdown}>
-              <BsPlayFill />
-            </span>
+              {active === true ? (
+                <span onClick={pauseCountdown}>
+                  <BsFillPauseFill />
+                </span>
+              ) : (
+                <span onClick={startCountdown}>
+                  <BsPlayFill />
+                </span>
+              )}
+              
           </section>
         )}
 
