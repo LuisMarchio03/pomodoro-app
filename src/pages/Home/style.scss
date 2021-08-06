@@ -46,9 +46,14 @@
             display: flex;
             justify-content: center;
 
-            &#active {
+            &#activeMenu {
               text-decoration: underline;
-              color: #25d474;
+              color: var(--main-green);
+            }
+
+            &#activeMenuShortBreak {
+              text-decoration: underline;
+              color: var(--main-blue);
             }
           }
         }
@@ -61,7 +66,39 @@
     height: 400px;
 
     background-color: rgba(64,73,121,1);
-    border: 10px solid #25d474;
+    border: 10px solid var(--main-green);
+    border-radius: 50%;
+
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .number-counter {
+      strong {
+        font: 500 6rem sans-serif;
+        color: #ffffff;
+      }
+
+      margin-top: 3.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    > span {
+      font-size: 6rem;
+      color: #ffffff;
+
+      cursor: pointer;
+    }
+  }
+
+  section.counterShortBreak {
+    width: 400px;
+    height: 400px;
+
+    background-color: rgba(64,73,121,1);
+    border: 10px solid var(--main-blue);
     border-radius: 50%;
 
     margin: 0 auto;
