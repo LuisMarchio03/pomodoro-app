@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { useTimer } from "../../hooks/useTimer";
 
+import Modal from 'react-modal';
+import Switch from "react-switch";
+
 import { FcDataConfiguration } from "react-icons/fc";
 import { BsPlayFill } from "react-icons/bs";
 import { BsFillPauseFill } from "react-icons/bs";
@@ -54,6 +57,18 @@ export function Home() {
       setShortBreak(false);
     }
   }, [shortBreak, timeShortBreak]);
+
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+
+  Modal.setAppElement('#root');
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   return (
     <main className="container">
@@ -140,8 +155,55 @@ export function Home() {
 
         <footer>
           <span>
-            <FcDataConfiguration />
+            <FcDataConfiguration onClick={openModal} />
           </span>
+          <div id="MyModal" className="invisible">
+            <Modal
+              isOpen={modalIsOpen}
+              onRequestClose={closeModal}
+              contentLabel="Example Modal"
+            >
+              <header className="button-close">
+                <button onClick={closeModal}>close</button>
+              </header>
+
+              <main className="main-modal">
+                <h2>Configuração</h2>
+
+                <div>
+                  <h3>Minutos de trabalho</h3>
+                  <form>
+                    <select>
+                      <option value="" >30</option>
+                      <option value="" >25</option>
+                      <option value="" >20</option>
+                      <option value="" >15</option>
+                    </select>
+                  </form>
+                </div>
+                <div>
+                  <h3>Minutos de intervalo (Short break)</h3>
+                  <form>
+                    <select>
+                      <option value="" >15</option>
+                      <option value="" >10</option>
+                      <option value="" >5</option>
+                      <option value="" >3</option>
+                    </select>
+                  </form>
+                </div>
+                <div>
+                  <h3>Tema dark/light</h3>
+                  <Switch />
+                </div>
+              </main>
+
+              <footer className="footer-modal">
+
+              </footer>
+                    
+            </Modal>
+          </div>
         </footer>
       </div>
     </main>
