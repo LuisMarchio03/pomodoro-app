@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useTimer } from "../../hooks/useTimer";
 
-import Modal from 'react-modal';
+import Modal from "react-modal";
 import Switch from "react-switch";
 
 import { FcDataConfiguration } from "react-icons/fc";
@@ -9,13 +9,14 @@ import { BsPlayFill } from "react-icons/bs";
 import { BsFillPauseFill } from "react-icons/bs";
 
 import "./style.scss";
+import { useModalStyles } from "../../hooks/useModalStyles";
 
 export function Home() {
   const {
     time,
     setTime,
     timeShortBreak,
-    setTimeShortBreak,  
+    setTimeShortBreak,
     active,
     setActive,
     shortBreak,
@@ -29,7 +30,7 @@ export function Home() {
     secondShortBreakLeft,
     secondShortBreakRight,
     startCountdown,
-    pauseCountdown
+    pauseCountdown,
   } = useTimer();
 
   useEffect(() => {
@@ -43,8 +44,7 @@ export function Home() {
       setShortBreak(true);
     }
   }, [active, time]);
-  
-  
+
   useEffect(() => {
     if (shortBreak && timeShortBreak > 0) {
       setTimeout(() => {
@@ -60,7 +60,7 @@ export function Home() {
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
-  Modal.setAppElement('#root');
+  Modal.setAppElement("#root");
 
   function openModal() {
     setIsOpen(true);
@@ -70,6 +70,33 @@ export function Home() {
     setIsOpen(false);
   }
 
+  const {
+    buttonClose,
+    mainModal,
+    heading,
+    heading2,
+    formStyle,
+    formSelectStyle,
+    formOptionStyle,
+    footerModalButton,
+  } = useModalStyles();
+
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      width: "400px",
+      height: "600px",
+      borderRadius: "50px",
+      border: "10px solid #25d474",
+      background: "#fcfcfc",
+    },
+  };
+
   return (
     <main className="container">
       <div>
@@ -77,33 +104,35 @@ export function Home() {
           <h1>Pomodoro</h1>
           <nav>
             {shortBreak === false ? (
-                <ul>
-                  <li>
-                    <a id="activeMenu" href="">
-                      Pomodoro
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">Short break</a>
-                  </li>
-                  <li>
-                    <a id="long-break" href="">Long break</a>
-                  </li>
-                </ul>
+              <ul>
+                <li>
+                  <a id="activeMenu" href="">
+                    Pomodoro
+                  </a>
+                </li>
+                <li>
+                  <a href="">Short break</a>
+                </li>
+                <li>
+                  <a id="long-break" href="">
+                    Long break
+                  </a>
+                </li>
+              </ul>
             ) : (
-                <ul>
-                  <li>
-                    <a href="">Pomodoro</a>
-                  </li>
-                  <li>
-                    <a id="activeMenuShortBreak" href="">
-                      Short break
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">Long break</a>
-                  </li>
-                </ul>
+              <ul>
+                <li>
+                  <a href="">Pomodoro</a>
+                </li>
+                <li>
+                  <a id="activeMenuShortBreak" href="">
+                    Short break
+                  </a>
+                </li>
+                <li>
+                  <a href="">Long break</a>
+                </li>
+              </ul>
             )}
           </nav>
         </header>
@@ -120,36 +149,35 @@ export function Home() {
               <strong>{secondRight}</strong>
             </div>
             {active === false ? (
-                <span onClick={startCountdown}>
-                  <BsPlayFill />
-                </span>
-              ) : (
-                <span onClick={pauseCountdown}>
-                  <BsFillPauseFill />
-                </span>
-              )}
+              <span onClick={startCountdown}>
+                <BsPlayFill />
+              </span>
+            ) : (
+              <span onClick={pauseCountdown}>
+                <BsFillPauseFill />
+              </span>
+            )}
           </section>
         ) : (
           <section className="counterShortBreak">
             <div className="number-counter">
-                <strong>{minuteShortBreakLeft}</strong>
-                <strong>{minuteShortBreakRight}</strong>
+              <strong>{minuteShortBreakLeft}</strong>
+              <strong>{minuteShortBreakRight}</strong>
 
-                <strong>:</strong>
+              <strong>:</strong>
 
-                <strong>{secondShortBreakLeft}</strong>
-                <strong>{secondShortBreakRight}</strong>
+              <strong>{secondShortBreakLeft}</strong>
+              <strong>{secondShortBreakRight}</strong>
             </div>
-              {active === true ? (
-                <span onClick={pauseCountdown}>
-                  <BsFillPauseFill />
-                </span>
-              ) : (
-                <span onClick={startCountdown}>
-                  <BsPlayFill />
-                </span>
-              )}
-              
+            {active === true ? (
+              <span onClick={pauseCountdown}>
+                <BsFillPauseFill />
+              </span>
+            ) : (
+              <span onClick={startCountdown}>
+                <BsPlayFill />
+              </span>
+            )}
           </section>
         )}
 
@@ -161,47 +189,49 @@ export function Home() {
             <Modal
               isOpen={modalIsOpen}
               onRequestClose={closeModal}
-              contentLabel="Example Modal"
+              contentLabel="Modal -> config"
+              style={customStyles}
             >
-              <header className="button-close">
-                <button onClick={closeModal}>close</button>
+              <header>
+                <button onClick={closeModal} style={buttonClose}>
+                  close
+                </button>
               </header>
 
-              <main className="main-modal">
-                <h2>Configuração</h2>
+              <main style={mainModal}>
+                <h2 style={heading2}>Configuração</h2>
 
                 <div>
-                  <h3>Minutos de trabalho</h3>
-                  <form>
-                    <select>
-                      <option value="" >30</option>
-                      <option value="" >25</option>
-                      <option value="" >20</option>
-                      <option value="" >15</option>
+                  <h3 style={heading}>Minutos de trabalho</h3>
+                  <form style={formStyle}>
+                    <select style={formSelectStyle}>
+                      <option style={formOptionStyle} value="">30</option>
+                      <option style={formOptionStyle} value="">25</option>
+                      <option style={formOptionStyle} value="">20</option>
+                      <option style={formOptionStyle} value="">15</option>
                     </select>
                   </form>
                 </div>
                 <div>
-                  <h3>Minutos de intervalo (Short break)</h3>
-                  <form>
-                    <select>
-                      <option value="" >15</option>
-                      <option value="" >10</option>
-                      <option value="" >5</option>
-                      <option value="" >3</option>
+                  <h3 style={heading}>Minutos de intervalo (Short break)</h3>
+                  <form style={formStyle}>
+                    <select style={formSelectStyle}>
+                      <option style={formOptionStyle} value="">15</option>
+                      <option style={formOptionStyle} value="">10</option>
+                      <option style={formOptionStyle} value="">5</option>
+                      <option style={formOptionStyle} value="">3</option>
                     </select>
                   </form>
                 </div>
                 <div>
-                  <h3>Tema dark/light</h3>
-                  <Switch />
+                  <h3 style={heading}>Tema dark/light</h3>
+                  {/* <Switch /> */}
                 </div>
               </main>
 
               <footer className="footer-modal">
-
+                <button style={footerModalButton}>Salvar</button>
               </footer>
-                    
             </Modal>
           </div>
         </footer>
