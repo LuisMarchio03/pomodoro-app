@@ -1,15 +1,17 @@
-import React, { useEffect } from "react";
+import React, { FormEvent, useEffect } from "react";
 import { useTimer } from "../../hooks/useTimer";
 
 import Modal from "react-modal";
 import Switch from "react-switch";
 
+import { useModalStyles } from "../../hooks/useModalStyles";
+
 import { FcDataConfiguration } from "react-icons/fc";
 import { BsPlayFill } from "react-icons/bs";
 import { BsFillPauseFill } from "react-icons/bs";
+import { AiFillCloseCircle } from 'react-icons/ai';
 
 import "./style.scss";
-import { useModalStyles } from "../../hooks/useModalStyles";
 
 export function Home() {
   const {
@@ -77,7 +79,7 @@ export function Home() {
     heading2,
     formStyle,
     formSelectStyle,
-    formOptionStyle,
+    footerModal,
     footerModalButton,
   } = useModalStyles();
 
@@ -91,11 +93,18 @@ export function Home() {
       transform: "translate(-50%, -50%)",
       width: "400px",
       height: "600px",
-      borderRadius: "50px",
+      borderRadius: "10px",
       border: "10px solid #25d474",
       background: "#fcfcfc",
+      overflow: 'auto',
     },
   };
+
+  function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+
+
+  }
 
   return (
     <main className="container">
@@ -194,7 +203,7 @@ export function Home() {
             >
               <header>
                 <button onClick={closeModal} style={buttonClose}>
-                  close
+                  <AiFillCloseCircle />
                 </button>
               </header>
 
@@ -205,10 +214,10 @@ export function Home() {
                   <h3 style={heading}>Minutos de trabalho</h3>
                   <form style={formStyle}>
                     <select style={formSelectStyle}>
-                      <option style={formOptionStyle} value="">30</option>
-                      <option style={formOptionStyle} value="">25</option>
-                      <option style={formOptionStyle} value="">20</option>
-                      <option style={formOptionStyle} value="">15</option>
+                      <option value="">30</option>
+                      <option value="">25</option>
+                      <option value="">20</option>
+                      <option value="">15</option>
                     </select>
                   </form>
                 </div>
@@ -216,20 +225,20 @@ export function Home() {
                   <h3 style={heading}>Minutos de intervalo (Short break)</h3>
                   <form style={formStyle}>
                     <select style={formSelectStyle}>
-                      <option style={formOptionStyle} value="">15</option>
-                      <option style={formOptionStyle} value="">10</option>
-                      <option style={formOptionStyle} value="">5</option>
-                      <option style={formOptionStyle} value="">3</option>
+                      <option value="">15</option>
+                      <option value="">10</option>
+                      <option value="">5</option>
+                      <option value="">3</option>
                     </select>
                   </form>
                 </div>
                 <div>
                   <h3 style={heading}>Tema dark/light</h3>
-                  {/* <Switch /> */}
+                  <Switch />
                 </div>
               </main>
 
-              <footer className="footer-modal">
+              <footer className="footer-modal" style={footerModal}>
                 <button style={footerModalButton}>Salvar</button>
               </footer>
             </Modal>
