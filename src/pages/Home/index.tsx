@@ -234,12 +234,12 @@ export function Home() {
                 </div>
                 <div>
                   <h3 style={heading}>Tema dark/light</h3>
-                  <Switch />
+                  {/* <Switch /> */}
                 </div>
               </main>
 
               <footer className="footer-modal" style={footerModal}>
-                <button style={footerModalButton}>Salvar</button>
+                <button type="submit" style={footerModalButton}>Salvar</button>
               </footer>
             </Modal>
           </div>
