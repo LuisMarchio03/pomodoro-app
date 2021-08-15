@@ -48,6 +48,8 @@ export function useModalStyles() {
   const footerModal: ModalType = {
     display: 'flex',
     justifyContent: 'center',
+
+    marginTop: '3rem',
   }
 
   const footerModalButton: ModalType = {

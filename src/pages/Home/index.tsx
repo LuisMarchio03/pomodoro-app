@@ -1,5 +1,6 @@
 import React, { FormEvent, useEffect } from "react";
 import { useTimer } from "../../hooks/useTimer";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 import Modal from "react-modal";
 import Switch from "react-switch";
@@ -99,12 +100,6 @@ export function Home() {
       overflow: 'auto',
     },
   };
-
-  function handleSubmit(event: FormEvent) {
-    event.preventDefault();
-
-
-  }
 
   return (
     <main className="container">
@@ -210,37 +205,35 @@ export function Home() {
               <main style={mainModal}>
                 <h2 style={heading2}>Configuração</h2>
 
-                <div>
-                  <h3 style={heading}>Minutos de trabalho</h3>
-                  <form style={formStyle}>
-                    <select style={formSelectStyle}>
-                      <option value="">30</option>
-                      <option value="">25</option>
-                      <option value="">20</option>
-                      <option value="">15</option>
-                    </select>
-                  </form>
-                </div>
-                <div>
-                  <h3 style={heading}>Minutos de intervalo (Short break)</h3>
-                  <form style={formStyle}>
-                    <select style={formSelectStyle}>
-                      <option value="">15</option>
-                      <option value="">10</option>
-                      <option value="">5</option>
-                      <option value="">3</option>
-                    </select>
-                  </form>
-                </div>
-                <div>
-                  <h3 style={heading}>Tema dark/light</h3>
-                  {/* <Switch /> */}
-                </div>
-              </main>
+                <form style={formStyle}>
+                  <div>
+                    <h3 style={heading}>Minutos de trabalho</h3>    
+                      <select style={formSelectStyle}>
+                        <option value="">30</option>
+                        <option value="">25</option>
+                        <option value="">20</option>
+                        <option value="">15</option>
+                      </select>
+                  </div>
+                  <div>
+                    <h3 style={heading}>Minutos de intervalo (Short break)</h3>
+                      <select style={formSelectStyle}>
+                        <option value="">15</option>
+                        <option value="">10</option>
+                        <option value="">5</option>
+                        <option value="">3</option>
+                      </select>
+                  </div>
+                  {/* <div>
+                    <h3 style={heading}>Tema dark/light</h3>
+                      <Switch />
+                  </div> */}
 
-              <footer className="footer-modal" style={footerModal}>
-                <button type="submit" style={footerModalButton}>Salvar</button>
-              </footer>
+                  <footer className="footer-modal" style={footerModal}>
+                    <button type="submit" style={footerModalButton}>Salvar</button>
+                  </footer>
+                </form>
+              </main>
             </Modal>
           </div>
         </footer>
